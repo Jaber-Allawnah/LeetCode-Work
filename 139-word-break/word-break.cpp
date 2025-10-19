@@ -25,7 +25,6 @@ class Solution {
         }
     };
 
-    // --- DFS function ---
     bool dfs(int start, string& s, TrieNode* root, vector<int>& memo) {
         if (start == s.size()) return true;          // reached the end of s
         if (memo[start] != -1) return memo[start];   // already computed
@@ -48,7 +47,7 @@ class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
         Trie* myTrie = new Trie();
-        for (auto& word : wordDict) {
+        for (string word : wordDict) {
             myTrie->insert(word);
         }
 
