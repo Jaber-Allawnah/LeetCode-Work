@@ -26,16 +26,16 @@ class Solution {
     };
 
     bool dfs(int start, string& s, TrieNode* root, vector<int>& memo) {
-        if (start == s.size()) return true;          // reached the end of s
-        if (memo[start] != -1) return memo[start];   // already computed
+        if (start == s.size()) return true;//if the string is nothing          
+        if (memo[start] != -1) return memo[start];// if it is either visited or not  
 
         TrieNode* node = root;
         for (int i = start; i < s.size(); i++) {
-            int idx = s[i] - 'a';
-            if (!node->ch[idx]) break;               // no match, stop this path
+            int idx = s[i] - 'a';//find the index of the current letter in the string
+            if (!node->ch[idx]) break;               
             node = node->ch[idx];
             if (node->end) {
-                // found a word ending here, try the rest
+                
                 if (dfs(i + 1, s, root, memo))
                     return memo[start] = true;
             }
@@ -51,7 +51,7 @@ public:
             myTrie->insert(word);
         }
 
-        vector<int> memo(s.size(), -1);  // -1: unvisited, 0: false, 1: true
+        vector<int> memo(s.size(), -1);// vector full of -1, 0 is unvisted and 1 is visited 
         return dfs(0, s, myTrie->root, memo);
     }
 };
