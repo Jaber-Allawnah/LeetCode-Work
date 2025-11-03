@@ -1,30 +1,30 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> res;
-        sort(nums.begin(), nums.end());
-        const int n = nums.size();
+        vector<vector<int>> triplets;
+        sort(nums.begin(),nums.end());
+        int j,k,n=nums.size();
+        for(int i=0;i<nums.size();i++){
+            if(i>0&&nums[i]==nums[i-1])
+            continue;
+            if(nums[i]>0)
+            break;
+            j=i+1;
+            k=n-1;
+        while(j<k){ 
+            long sum=nums[i]+nums[j]+nums[k];
+            if(sum==0){
+                triplets.push_back({nums[i],nums[j],nums[k]});
+                int lv=nums[j],rv=nums[k];
+                while(j<k&&nums[j]==lv) j++;
+                while(j<k&&nums[k]==rv) k--;
+            }else if (sum>0)
+            k--;
+            else if(sum<0)
+            j++;
 
-        for (int i = 0; i < n; ++i) {
-            if (i > 0 && nums[i] == nums[i-1]) continue;   // skip duplicate anchors
-            if (nums[i] > 0) break;                         // no way to sum to 0 beyond this
-
-            int l = i + 1, r = n - 1;
-            while (l < r) {
-                long sum = (long)nums[i] + nums[l] + nums[r];
-                if (sum == 0) {
-                    res.push_back({nums[i], nums[l], nums[r]});
-                    // skip duplicates on l and r
-                    int lv = nums[l], rv = nums[r];
-                    while (l < r && nums[l] == lv) ++l;
-                    while (l < r && nums[r] == rv) --r;
-                } else if (sum < 0) {
-                    ++l;
-                } else {
-                    --r;
-                }
-            }
         }
-        return res;
+    }
+    return triplets;
     }
 };
