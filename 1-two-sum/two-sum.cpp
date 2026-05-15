@@ -8,10 +8,8 @@ public:
         }
         for(int i=0;i<nums.size();i++){
             int value=target-nums[i];
-            if(arrayMap.count(value)){
-                if(i!=arrayMap[value])
+            if(arrayMap.count(value)&&i!=arrayMap[value]){
                 return {i,arrayMap[value]};
-                continue;
             }        
         }
 
