@@ -1,30 +1,30 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        vector<vector<int>> triplets;
+        vector<vector<int>> final;
         sort(nums.begin(),nums.end());
-        int j,k,n=nums.size();
-        for(int i=0;i<nums.size();i++){
-            if(i>0&&nums[i]==nums[i-1])
-            continue;
-            if(nums[i]>0)
-            break;
-            j=i+1;
-            k=n-1;
-        while(j<k){ 
-            long sum=nums[i]+nums[j]+nums[k];
-            if(sum==0){
-                triplets.push_back({nums[i],nums[j],nums[k]});
-                int lv=nums[j],rv=nums[k];
-                while(j<k&&nums[j]==lv) j++;
-                while(j<k&&nums[k]==rv) k--;
-            }else if (sum>0)
-            k--;
-            else if(sum<0)
-            j++;
+        int size=nums.size();
+        for(int i=0;i<size-2;i++){
+            int k=size-1;
+            int j=i+1;
+            if(i>0&&(nums[i]==nums[i-1])) continue;
+            while(j<k){
 
+                if(nums[j]+nums[k]+nums[i]==0){
+                    final.push_back({nums[i],nums[j],nums[k]});
+                    j++;
+                    k--;
+                    while(j<k&&nums[k+1]==nums[k]) k--;
+                    while(j<k&&nums[j-1]==nums[j]) j++;
+                }
+                else if(nums[j]+nums[k]+nums[i]<0){
+                    j++;
+                }
+                else if(nums[j]+nums[k]+nums[i]>0){
+                    k--;
+                }
+            }
         }
-    }
-    return triplets;
+        return final;
     }
 };
