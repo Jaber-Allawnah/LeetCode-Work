@@ -1,11 +1,14 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        for(int i=0;i<nums.size();i++){
+        bool found=false;
+        int i;
+        for(i=0;i<nums.size();i++){
             if(target==nums[i]){
-                return i;
+                found=true;
+                break;
             }
         }
-        return -1;
+        return found?i:-1;
     }
 };
